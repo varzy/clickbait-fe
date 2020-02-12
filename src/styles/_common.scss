@@ -7,3 +7,15 @@
     height: 100%;
   }
 }
+
+.gap {
+  margin-top: 12px;
+
+  &-s {
+    margin-top: 8px;
+  }
+
+  &-l {
+    margin-top: 16px;
+  }
+}

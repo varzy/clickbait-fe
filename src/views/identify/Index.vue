@@ -1,11 +1,11 @@
 <template>
-  <div class="index">
-    hello, world
+  <div class="identify">
+    identify
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Index'
+  name: 'Identify'
 };
 </script>
