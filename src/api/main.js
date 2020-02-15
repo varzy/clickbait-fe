@@ -1,7 +1,14 @@
 import http from '../utils/http';
 
-export const FetchNews = () =>
+export const reqFetchNews = () =>
   http.request({
     url: '/news_list1',
     method: 'GET'
+  });
+
+export const reqVerifyNews = data =>
+  http.request({
+    url: '/verify',
+    method: 'POST',
+    data
   });

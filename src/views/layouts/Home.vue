@@ -66,6 +66,7 @@ export default {
   &-body {
     background-color: #f0f2f5;
     min-height: 100vh;
+    padding-bottom: 108px;
   }
 }
 </style>
