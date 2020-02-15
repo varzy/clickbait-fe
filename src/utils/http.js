@@ -1,18 +1,6 @@
 import Axios from 'axios';
 import { Message as ElMessage } from 'element-ui';
 
-const reportWhenDeveloping = (data, title = `AXIOS ERROR`) => {
-  if (process.env.NODE_ENV === 'development') {
-    /* eslint-disable no-console */
-    console.error(`!!! ${title} !!!`);
-    /* eslint-disable no-console */
-    console.warn('--- Log Start ---');
-    console.log(data);
-    /* eslint-disable no-console */
-    console.warn('--- Log End ---');
-  }
-};
-
 const instance = Axios.create({
   baseURL: process.env.VUE_APP_BASE_URL_API,
   timeout: 8000,
@@ -21,29 +9,9 @@ const instance = Axios.create({
 });
 
 instance.interceptors.response.use(
-  res => {
-    // 正常情况
-    if (res.data && res.data.code === 0) return res.data;
-
-    // ↓ 异常情况
-    reportWhenDeveloping(res, `MAYBE AN ABNORMAL RESPONSE`);
-
-    // 如果接口允许显示异常
-    // - 如果后端提供了信息则使用后端的信息
-    // - 后端没有提供信息则使用默认的异常信息
-    if (res.config && res.config.showError) {
-      const message =
-        res.data && res.data.message && typeof res.data.message === 'string'
-          ? res.data.message
-          : res.config.errorMsg;
-      ElMessage({ message, type: 'error' });
-    }
-
-    return Promise.reject(res.data);
-  },
+  res => res,
   err => {
     const res = err.response;
-    reportWhenDeveloping(res, `HTTP REQUEST ERROR`);
 
     // http 404
     if (+res.status === 404) {
@@ -55,10 +23,7 @@ instance.interceptors.response.use(
     }
     // 其他异常
     else {
-      // 如果接口允许显示异常，则显示预设的异常信息
-      if (res.config && res.config.showError) {
-        ElMessage({ message: res.config.errorMsg, type: 'error' });
-      }
+      ElMessage({ message: '网络异常', type: 'error' });
     }
 
     return Promise.reject(err.response);

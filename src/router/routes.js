@@ -11,17 +11,20 @@ export default [
       {
         path: 'index',
         name: 'Index',
-        component: _import('index/Index')
+        component: _import('index/Index'),
+        meta: { title: '首页' }
       },
       {
         path: 'example',
         name: 'Example',
-        component: _import('example/Index')
+        component: _import('example/Index'),
+        meta: { title: '标题党示例' }
       },
       {
         path: 'identify',
         name: 'Identify',
-        component: _import('identify/Index')
+        component: _import('identify/Index'),
+        meta: { title: '标题党识别' }
       }
     ]
   },

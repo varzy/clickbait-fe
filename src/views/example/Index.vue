@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { FetchNews } from '../../api/main';
+
 export default {
   name: 'Example',
 
@@ -18,6 +20,17 @@ export default {
     return {
       activeTab: 'general'
     };
+  },
+
+  created() {
+    this.getNews();
+  },
+
+  methods: {
+    async getNews() {
+      const res = await FetchNews();
+      console.log(res.data);
+    }
   }
 };
 </script>
