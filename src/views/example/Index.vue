@@ -1,7 +1,7 @@
 <template>
   <div class="example">
     <el-card class="tabs" shadow="hover">
-      <el-tabs lazy v-model="activeTab" @tab-click="handleTabClicked">
+      <el-tabs lazy v-model="activeTab">
         <el-tab-pane label="常见类型" name="general"></el-tab-pane>
 
         <el-tab-pane label="类型特征" name="feature">
@@ -36,13 +36,13 @@ export default {
     async getNews() {
       const res = await reqFetchNews();
       console.log(res.data);
-    },
-    handleTabClicked(tab) {
-      if (tab.name === 'feature' && !this.isFeaturePaneInited) {
-        this.$refs.paneFeature.init();
-        this.isFeaturePaneInited = true;
-      }
     }
+    // handleTabClicked(tab) {
+    //   if (tab.name === 'feature' && !this.isFeaturePaneInited) {
+    //     this.$refs.paneFeature.init();
+    //     this.isFeaturePaneInited = true;
+    //   }
+    // }
   }
 };
 </script>
