@@ -6,7 +6,7 @@
         background-color="#304156"
         text-color="#ccc"
         active-text-color="#409EFF"
-        :default-active="activeMenu"
+        :default-active="calcActiveMenu"
         @select="handleMenuSelected"
       >
         <el-menu-item index="Index">
@@ -34,10 +34,10 @@
 export default {
   name: 'Home',
 
-  data() {
-    return {
-      activeMenu: 'Index'
-    };
+  computed: {
+    calcActiveMenu() {
+      return this.$route.name;
+    }
   },
 
   methods: {
