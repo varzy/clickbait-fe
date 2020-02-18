@@ -1,8 +1,10 @@
 <template>
   <div class="example">
     <el-card class="tabs" shadow="hover">
-      <el-tabs lazy v-model="activeTab">
-        <el-tab-pane label="常见类型" name="general"></el-tab-pane>
+      <el-tabs lazy v-model="activeTab" @click="tab => setActiveTab(tab.name)">
+        <el-tab-pane label="常见类型" name="general">
+          <pane-general ref="paneGeneral"></pane-general>
+        </el-tab-pane>
 
         <el-tab-pane label="类型特征" name="feature">
           <pane-feature ref="paneFeature"></pane-feature>
@@ -13,36 +15,38 @@
 </template>
 
 <script>
-import { reqFetchNews } from '../../api/main';
+import PaneGeneral from './PaneGeneral';
 import PaneFeature from './PaneFeature';
 
 export default {
   name: 'Example',
 
-  components: { PaneFeature },
+  components: { PaneGeneral, PaneFeature },
 
   data() {
     return {
       activeTab: 'general',
+      isGeneralPaneInited: false,
       isFeaturePaneInited: false
     };
   },
 
-  created() {
-    this.getNews();
+  mounted() {
+    this.setActiveTab('general');
   },
 
   methods: {
-    async getNews() {
-      const res = await reqFetchNews();
-      console.log(res.data);
+    setActiveTab(tabName) {
+      if (tabName === 'general' && !this.isGeneralPaneInited) {
+        this.$refs.paneGeneral.init();
+        this.isGeneralPaneInited = true;
+      }
+
+      if (tabName === 'feature' && !this.isFeaturePaneInited) {
+        this.$refs.paneFeature.init();
+        this.isFeaturePaneInited = true;
+      }
     }
-    // handleTabClicked(tab) {
-    //   if (tab.name === 'feature' && !this.isFeaturePaneInited) {
-    //     this.$refs.paneFeature.init();
-    //     this.isFeaturePaneInited = true;
-    //   }
-    // }
   }
 };
 </script>
