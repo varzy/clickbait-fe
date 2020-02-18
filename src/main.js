@@ -6,7 +6,7 @@ import ElementUI from 'element-ui';
 // Styles
 import './styles/main.scss';
 
-Vue.use(ElementUI, { size: 'small' });
+Vue.use(ElementUI, { size: 'medium' });
 
 Vue.config.productionTip = false;
 

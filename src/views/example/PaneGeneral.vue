@@ -3,18 +3,15 @@
     <div class="category" v-for="(category, index) in categories" :key="index">
       <div class="header">{{ index + 1 }}. {{ category.header }}</div>
       <div class="table">
-        <el-table
-          size="mini"
-          :header-cell-style="{ 'background-color': '#f5f7fa' }"
-          :data="category.tableData"
-        >
+        <el-table :header-cell-style="{ 'background-color': '#f5f7fa' }" :data="category.tableData">
+          <el-table-column type="index" label="#"></el-table-column>
           <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column label="链接" width="144px">
+          <el-table-column label="链接" width="180px">
             <template #default="scope">
               <a class="link" :href="scope.row.url" target="_blank">新闻原文链接 </a>
             </template>
           </el-table-column>
-          <el-table-column prop="source" label="来源" width="144px"></el-table-column>
+          <el-table-column prop="source" label="来源" width="180px"></el-table-column>
         </el-table>
       </div>
     </div>
@@ -44,8 +41,8 @@ export default {
       this.getNews();
     },
     async getNews() {
-      const res = await reqFetchNews();
-      const showingNewsList = res.data.news1.slice(0, 11);
+      const { data } = await reqFetchNews();
+      const showingNewsList = data.news1.slice(0, 11);
       const chunkedNewsList = _.chunk(showingNewsList, 3);
 
       this.categories = this.categories.map((category, index) => {

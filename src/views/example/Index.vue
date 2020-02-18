@@ -1,7 +1,7 @@
 <template>
   <div class="example">
     <el-card class="tabs" shadow="hover">
-      <el-tabs lazy v-model="activeTab" @click="tab => setActiveTab(tab.name)">
+      <el-tabs lazy v-model="activeTab" @tab-click="tab => setActiveTab(tab.name)">
         <el-tab-pane label="常见类型" name="general">
           <pane-general ref="paneGeneral"></pane-general>
         </el-tab-pane>

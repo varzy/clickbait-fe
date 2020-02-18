@@ -6,6 +6,12 @@ export const reqFetchNews = () =>
     method: 'GET'
   });
 
+export const reqFetchFeatures = () =>
+  http.request({
+    url: '/news_list2',
+    method: 'GET'
+  });
+
 export const reqVerifyNews = data =>
   http.request({
     url: '/verify',
