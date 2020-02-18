@@ -3,7 +3,7 @@ import { Message as ElMessage } from 'element-ui';
 
 const instance = Axios.create({
   baseURL: process.env.VUE_APP_BASE_URL_API,
-  timeout: 8000,
+  timeout: 1000 * 60 * 5,
   withCredentials: true,
   responseType: 'json'
 });
