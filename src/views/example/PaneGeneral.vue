@@ -42,7 +42,7 @@ export default {
     },
     async getNews() {
       const { data } = await reqFetchNews();
-      const showingNewsList = data.news1.slice(0, 11);
+      const showingNewsList = data.news1.slice(0, 12);
       const chunkedNewsList = _.chunk(showingNewsList, 3);
 
       this.categories = this.categories.map((category, index) => {
