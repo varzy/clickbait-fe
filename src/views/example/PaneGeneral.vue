@@ -28,10 +28,10 @@ export default {
   data() {
     return {
       categories: [
-        { header: '题文不符误导型', tableData: [] },
-        { header: '低俗恶俗炒作型', tableData: [] },
-        { header: '制造噱头煽动型', tableData: [] },
-        { header: '热点人事挂靠型', tableData: [] }
+        { header: '', tableData: [] },
+        { header: '', tableData: [] },
+        { header: '', tableData: [] },
+        { header: '', tableData: [] }
       ]
     };
   },
@@ -46,6 +46,7 @@ export default {
       const chunkedNewsList = _.chunk(showingNewsList, 3);
 
       this.categories = this.categories.map((category, index) => {
+        category.header = window.GLB_CONFIG.commonCategories[index];
         category.tableData = chunkedNewsList[index];
         return category;
       });

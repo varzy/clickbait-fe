@@ -1,23 +1,30 @@
 <template>
   <div class="index">
-    <el-card class="info" shadow="hover">
-      <div class="title">标题党文章识别</div>
-      <el-divider></el-divider>
-      <div class="subtitle">识别标题党新闻，还公众新闻真相!</div>
-      <ul>
-        <li>权威数据来源</li>
-        <li>精准模型分析</li>
-      </ul>
+    <div class="header">标题党文章识别</div>
+
+    <el-divider></el-divider>
+
+    <el-card class="overviews" shadow="hover" header="数据总览">
+      <el-row>
+        <el-col class="column" v-for="(overview, index) in overviews" :key="index" :span="8">
+          <div class="overview">
+            <div class="overview-label">{{ overview.label }}</div>
+            <div class="overview-value">{{ overview.value }}</div>
+          </div>
+        </el-col>
+      </el-row>
     </el-card>
 
-    <el-card class="gap detail" shadow="hover">
-      <div class="rows">
-        <div class="row" v-for="(row, index) in detail" :key="index">
-          <div class="row-label">{{ row.label }}：</div>
-          <div class="row-value">{{ row.value }}</div>
-        </div>
-      </div>
-    </el-card>
+    <el-card class="gap ratio" shadow="hover" header="标题党新闻各类别占比总览"> </el-card>
+
+    <el-row class="gap" type="flex" :gutter="12">
+      <el-col class="categories" :span="12">
+        <el-card shadow="hover" header="标题党常见类型">132</el-card>
+      </el-col>
+      <el-col class="word_cloud" :span="12">
+        <el-card shadow="hover" header="高频特征词总览">dasda</el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -27,12 +34,7 @@ export default {
 
   data() {
     return {
-      detail: [
-        { label: '姓名', value: '吴姣灿' },
-        { label: '年级', value: '研三' },
-        { label: '学号', value: 'xxx' },
-        { label: '手机号', value: '15555555555' }
-      ]
+      overviews: window.GLB_CONFIG.dataOverviews
     };
   }
 };
@@ -40,36 +42,32 @@ export default {
 
 <style lang="scss" scoped>
 .index {
-  .info {
-    .title {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .subtitle {
-      color: #666;
-    }
+  .header {
+    font-weight: bold;
+    font-size: 24px;
+    color: #555;
   }
 
-  .rows {
-    display: table;
+  .overviews {
+    .column {
+      border-right: 1px solid #ddd;
 
-    .row {
-      display: table-row;
-      height: 36px;
-      letter-spacing: 1.2px;
-
-      &-label {
-        display: table-cell;
-        vertical-align: middle;
-        width: 96px;
-        color: #333;
+      &:last-child {
+        border-right: 0;
       }
 
-      &-value {
-        display: table-cell;
-        vertical-align: middle;
-        color: #595959;
+      .overview {
+        &-label {
+          color: #666;
+          text-align: center;
+        }
+
+        &-value {
+          text-align: center;
+          font-weight: bold;
+          font-size: 24px;
+          margin-top: 12px;
+        }
       }
     }
   }
