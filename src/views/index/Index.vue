@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <div class="header">标题党文章识别</div>
+    <div class="header">标题党新闻识别</div>
 
     <el-divider></el-divider>
 
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       overviews: window.GLB_CONFIG.dataOverviews,
-      categoryRatios: window.GLB_CONFIG.categoryRatios,
+      categoryRatio: window.GLB_CONFIG.categoryRatio,
       commonCategories: window.GLB_CONFIG.commonCategories,
       featureWords: window.GLB_CONFIG.featureWords
     };
@@ -71,9 +71,11 @@ export default {
 
   methods: {
     renderCategoryRatios() {
+      const totalQuantity = this.categoryRatio.data.reduce((sum, item) => sum + item.quantity, 0);
+
       const ring = new Ring(document.getElementById('ring'), {
         forceFit: true,
-        data: this.categoryRatios,
+        data: this.categoryRatio.data,
         angleField: 'quantity',
         colorField: 'name',
         legend: {
@@ -81,7 +83,12 @@ export default {
         },
         label: {
           visible: true,
-          type: 'spider'
+          type: 'spider',
+          formatter: (angleField, colorField) => {
+            console.log(angleField);
+            console.log(colorField);
+            return [colorField._origin.name, (angleField / totalQuantity).toFixed(2) * 100 + '%'];
+          }
         }
       });
 
@@ -96,7 +103,7 @@ export default {
           id: index
         })),
         wordStyle: {
-          rotation: [-Math.PI / 4, Math.PI / 2],
+          rotation: [-Math.PI / 3, Math.PI / 2],
           rotateRatio: 0.5,
           rotationSteps: 4,
           shadowColor: '#333',

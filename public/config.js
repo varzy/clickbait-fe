@@ -6,12 +6,14 @@ window.GLB_CONFIG = {
     { label: '新闻数量', value: '10 篇' }
   ],
   // 类别占比
-  categoryRatios: [
-    { name: '社会', quantity: 30 },
-    { name: '娱乐', quantity: 20 },
-    { name: '健康', quantity: 15 },
-    { name: '财经', quantity: 10 }
-  ],
+  categoryRatio: {
+    data: [
+      { name: '社会', quantity: 30 },
+      { name: '娱乐', quantity: 20 },
+      { name: '健康', quantity: 15 },
+      { name: '财经', quantity: 10 }
+    ]
+  },
   // 常见类型
   commonCategories: [
     { label: '题文不服误导型', bgc: '#61c0a2' },
