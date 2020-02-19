@@ -46,7 +46,7 @@ export default {
       const chunkedNewsList = _.chunk(showingNewsList, 3);
 
       this.categories = this.categories.map((category, index) => {
-        category.header = window.GLB_CONFIG.commonCategories[index];
+        category.header = window.GLB_CONFIG.commonCategories[index].label;
         category.tableData = chunkedNewsList[index];
         return category;
       });
