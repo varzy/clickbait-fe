@@ -14,7 +14,14 @@ export const reqFetchFeatures = () =>
 
 export const reqVerifyNews = data =>
   http.request({
-    url: '/verify',
+    url: '/predict_pos',
+    method: 'POST',
+    data
+  });
+
+export const reqGenerateTitle = data =>
+  http.request({
+    url: '/generate_title',
     method: 'POST',
     data
   });

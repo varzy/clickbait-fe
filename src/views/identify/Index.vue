@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { reqVerifyNews } from '../../api/main';
+import { reqVerifyNews, reqGenerateTitle } from '../../api/main';
 
 export default {
   name: 'Identify',
@@ -100,7 +100,10 @@ export default {
         this.visible.identify = true;
         this.loading.identifying = true;
 
-        const data = await this.onVerify();
+        const { data } = await reqVerifyNews({
+          title: this.form.title,
+          content: this.form.content
+        });
 
         this.verified.possibility = data.posibility;
         this.verified.result = data.result;
@@ -119,20 +122,15 @@ export default {
         this.visible.generate = true;
         this.loading.generating = true;
 
-        const data = await this.onVerify();
+        const { data } = await reqGenerateTitle({
+          title: this.form.title,
+          content: this.form.content
+        });
 
         this.verified.newTitle = data.new_title;
       } finally {
         this.loading.generating = false;
       }
-    },
-    async onVerify() {
-      const res = await reqVerifyNews({
-        title: this.form.title,
-        content: this.form.content
-      });
-
-      return res.data;
     },
     onReset() {
       this.form.title = '';
